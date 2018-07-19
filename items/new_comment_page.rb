@@ -8,23 +8,27 @@ class CommentsPage < BasePage
   RETURN = {link_text: 'Return'}
 
 
-  def initialize(driver)
+  def initialize(driver, handler)
     super driver
+    @handler = handler
   end
 
   def filling_text(text)
-    wait_element(INPUT_FIELD)
+    @handler.wait_element(INPUT_FIELD)
+    @handler.enabled_element?(INPUT_FIELD)
     @driver.find_element(INPUT_FIELD).send_keys text
     self
   end
 
   def chose_one_category
+    @handler.enabled_element?(CONFIRM_CATEGORY)
     @driver.find_element(CATEGORY).click
     @driver.find_element(CONFIRM_CATEGORY).click
     self
   end
 
   def save_condition
+    @handler.enabled_element?(SAVE_BUTTON)
     @driver.find_element(SAVE_BUTTON).click
     self
   end
