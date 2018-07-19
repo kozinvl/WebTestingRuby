@@ -35,7 +35,7 @@ class CommentsPage < BasePage
 
   def return
     @driver.find_element(RETURN).click
-    self
+    MainPage.new @driver
   end
 
 

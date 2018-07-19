@@ -7,6 +7,11 @@ require_relative '../handlers/selenium_handlers'
 class MainPage < BasePage
   # elements
   NEW_BUTTON = {id: 'newbutton'}
+  STATUS = {id: 'SelectedStatus'}
+  NUMBER = {link_text: 'Number'}
+  APPLY = {id: 'applybutton'}
+  FIRST_COLUMN = {xpath: ".//*[@class='webgrid-row-style'][1]//*[@class='textcolumn']"}
+
 
   def initialize(driver)
     super driver
@@ -19,5 +24,31 @@ class MainPage < BasePage
     end
     CommentsPage.new @driver, @handler
   end
+
+  def sort_by_number
+    @driver.find_element(NUMBER).click
+    self
+  end
+
+  def change_status(text)
+    if @handler.enabled_element?(STATUS)
+      element = @driver.find_element(STATUS)
+      options = element.find_elements(tag_name: 'option')
+      options.each {|option| option.click if option.text == text}
+    end
+    self
+  end
+
+  def apply
+    @driver.find_element(APPLY).click
+    self
+  end
+
+  def get_first_column
+    text = @driver.find_element(FIRST_COLUMN).text
+    p text
+    sleep 4
+  end
+
 
 end
