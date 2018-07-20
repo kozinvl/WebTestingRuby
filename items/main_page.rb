@@ -7,10 +7,12 @@ require_relative '../handlers/selenium_handlers'
 class MainPage < BasePage
   # elements
   NEW_BUTTON = {id: 'newbutton'}
+  EDIT_BUTTON = {xpath: "//input[@value='Edit..']"}
   STATUS = {id: 'SelectedStatus'}
   NUMBER = {link_text: 'Number'}
   APPLY = {id: 'applybutton'}
   FIRST_COLUMN = {xpath: ".//*[@class='webgrid-row-style'][1]//*[@class='textcolumn']"}
+  REFRESH_COMMENT = {link_text: 'Comment Text'}
 
 
   def initialize(driver)
@@ -34,7 +36,7 @@ class MainPage < BasePage
     if @handler.enabled_element?(STATUS)
       element = @driver.find_element(STATUS)
       options = element.find_elements(tag_name: 'option')
-      options.each {|option| option.click if option.text == text}
+      options.each { |option| option.click if option.text == text }
     end
     self
   end
@@ -45,10 +47,24 @@ class MainPage < BasePage
   end
 
   def get_first_column
-    text = @driver.find_element(FIRST_COLUMN).text
-    p text
-    sleep 4
+    comment_text = @driver.find_element(FIRST_COLUMN).text
   end
 
+  def select_choose_box(value)
+    @handler.enabled_element?(xpath: "//input[@value='#{value}']")
+    @driver.find_element(xpath: "//input[@value='#{value}']").click
+    self
+  end
+
+  def edit_button
+    @handler.enabled_element?(EDIT_BUTTON)
+    @driver.find_element(EDIT_BUTTON).click
+    CommentsPage.new @driver, @handler
+  end
+
+  def refresh_by_comment_text
+    @driver.find_element(REFRESH_COMMENT).click
+    self
+  end
 
 end

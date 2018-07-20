@@ -6,6 +6,7 @@ class CommentsPage < BasePage
   CONFIRM_CATEGORY = {name: 'CurSelect'}
   SAVE_BUTTON = {xpath: ".//*/input[@value='Save']"}
   RETURN = {link_text: 'Return'}
+  CHECKBOX_STATUS = {id: 'Active'}
 
 
   def initialize(driver, handler)
@@ -13,9 +14,12 @@ class CommentsPage < BasePage
     @handler = handler
   end
 
-  def filling_text(text)
+  def filling_text(text, is_filled = false)
     @handler.wait_element(INPUT_FIELD)
     @handler.enabled_element?(INPUT_FIELD)
+    if is_filled
+      @driver.find_element(INPUT_FIELD).clear
+    end
     @driver.find_element(INPUT_FIELD).send_keys text
     self
   end
@@ -36,6 +40,11 @@ class CommentsPage < BasePage
   def return
     @driver.find_element(RETURN).click
     MainPage.new @driver
+  end
+
+  def checkbox_status
+    @driver.find_element(CHECKBOX_STATUS).click
+    self
   end
 
 
