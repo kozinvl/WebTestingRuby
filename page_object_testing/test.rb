@@ -12,9 +12,9 @@ class TestCommentsPage < Test::Unit::TestCase
   end
 
   def test_title_page
-    @actual_title = @main_page.get_title_page
+    actual_title = @main_page.get_title_page
     expected_title = 'Index'
-    assert_equal(@actual_title, expected_title)
+    assert_equal(expected_title, actual_title)
   end
 
   def test_new_comment
