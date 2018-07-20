@@ -1,7 +1,7 @@
-Feature: Basic Authentication
+Feature: Site loading
 
   @test
-  Scenario: User with valid credentials can login
+  Scenario: User got on main page
     Given I open a browser
-    When I login with a "admin" username and "admin" password
-    Then  I verify Practical SQA page is loaded
+    When I enter the side url
+    Then  I verify main page is loaded
