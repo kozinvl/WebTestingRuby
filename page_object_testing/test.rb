@@ -8,6 +8,7 @@ class TestCommentsPage < Test::Unit::TestCase
   def setup
     @driver = Selenium::WebDriver.for(:chrome)
     @driver.get(Url::SITE)
+    @driver.manage.window.maximize
     @main_page = MainPage.new @driver
   end
 
