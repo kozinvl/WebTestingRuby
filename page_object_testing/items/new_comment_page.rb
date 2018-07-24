@@ -1,13 +1,15 @@
 require_relative '../items/base_page'
 # This class contains functions which provide interaction with page
 class CommentsPage < BasePage
-  INPUT_FIELD = {id: 'Text'}
-  CATEGORY = {xpath: ".//*[@id='Categories'][@name='Categories'][@value = 6]"}
-  CONFIRM_CATEGORY = {name: 'CurSelect'}
-  SAVE_BUTTON = {xpath: ".//*/input[@value='Save']"}
-  RETURN = {link_text: 'Return'}
-  CHECKBOX_STATUS = {id: 'Active'}
-
+  INPUT_FIELD = { id: 'Text' }.freeze
+  NUMBER_FIELD = { id: 'Number' }.freeze
+  CATEGORY = { xpath: ".//*[@id='Categories'][@name='Categories'][@value = 6]" }.freeze
+  ALL_CATEGORIES = { name: 'AllSelect' }.freeze
+  CONFIRM_CATEGORY = { name: 'CurSelect' }.freeze
+  SAVE_BUTTON = { xpath: ".//*/input[@value='Save']" }.freeze
+  SAVE_AND_RETURN_BUTTON = { css: '#editor-navigation > input:nth-child(3)' }.freeze
+  RETURN = { link_text: 'Return' }.freeze
+  CHECKBOX_STATUS = { id: 'Active' }.freeze
 
   def initialize(driver, handler)
     super driver
@@ -17,10 +19,16 @@ class CommentsPage < BasePage
   def filling_text(text, is_filled = false)
     @handler.wait_element(INPUT_FIELD)
     @handler.enabled_element?(INPUT_FIELD)
-    if is_filled
-      @driver.find_element(INPUT_FIELD).clear
-    end
+    @driver.find_element(INPUT_FIELD).clear if is_filled
     @driver.find_element(INPUT_FIELD).send_keys text
+    self
+  end
+
+  def filling_number(number, is_filled = false)
+    @handler.wait_element(NUMBER_FIELD)
+    @handler.enabled_element?(NUMBER_FIELD)
+    @driver.find_element(NUMBER_FIELD).clear if is_filled
+    @driver.find_element(NUMBER_FIELD).send_keys number
     self
   end
 
@@ -31,9 +39,20 @@ class CommentsPage < BasePage
     self
   end
 
+  def chose_all_categories
+    @driver.find_element(ALL_CATEGORIES).click
+    self
+  end
+
   def save_condition
     @handler.enabled_element?(SAVE_BUTTON)
     @driver.find_element(SAVE_BUTTON).click
+    self
+  end
+
+  def save_n_return_condition
+    @handler.enabled_element?(SAVE_AND_RETURN_BUTTON)
+    @driver.find_element(SAVE_AND_RETURN_BUTTON).click
     self
   end
 
@@ -46,6 +65,4 @@ class CommentsPage < BasePage
     @driver.find_element(CHECKBOX_STATUS).click
     self
   end
-
-
 end
