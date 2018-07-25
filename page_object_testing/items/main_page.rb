@@ -28,6 +28,7 @@ class MainPage < BasePage
   end
 
   def sort_by_number
+    @handler.enabled_element?(NUMBER)
     @driver.find_element(NUMBER).click
     self
   end
@@ -42,7 +43,9 @@ class MainPage < BasePage
   end
 
   def apply
-    @driver.find_element(APPLY).click
+    if @handler.enabled_element?(APPLY)
+      @driver.find_element(APPLY).click
+    end
     self
   end
 
