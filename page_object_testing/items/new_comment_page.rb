@@ -1,15 +1,16 @@
 require_relative '../items/base_page'
 # This class contains functions which provide interaction with page
 class CommentsPage < BasePage
-  INPUT_FIELD = { id: 'Text' }.freeze
-  NUMBER_FIELD = { id: 'Number' }.freeze
-  CATEGORY = { xpath: ".//*[@id='Categories'][@name='Categories'][@value = 6]" }.freeze
-  ALL_CATEGORIES = { name: 'AllSelect' }.freeze
-  CONFIRM_CATEGORY = { name: 'CurSelect' }.freeze
-  SAVE_BUTTON = { xpath: ".//*/input[@value='Save']" }.freeze
-  SAVE_AND_RETURN_BUTTON = { css: '#editor-navigation > input:nth-child(3)' }.freeze
-  RETURN = { link_text: 'Return' }.freeze
-  CHECKBOX_STATUS = { id: 'Active' }.freeze
+  INPUT_FIELD = {id: 'Text'}.freeze
+  NUMBER_FIELD = {id: 'Number'}.freeze
+  CATEGORY = {xpath: ".//*[@id='Categories'][@name='Categories'][@value = 6]"}.freeze
+  ALL_CATEGORIES = {name: 'AllSelect'}.freeze
+  CONFIRM_CATEGORY = {name: 'CurSelect'}.freeze
+  SAVE_BUTTON = {xpath: ".//*/input[@value='Save']"}.freeze
+  SAVE_AND_RETURN_BUTTON = {css: '#editor-navigation > input:nth-child(3)'}.freeze
+  RETURN = {link_text: 'Return'}.freeze
+  CHECKBOX_STATUS = {id: 'Active'}.freeze
+  ERROR_FIELD = {id: 'errorfield'}.freeze
 
   def initialize(driver, handler)
     super driver
@@ -64,5 +65,9 @@ class CommentsPage < BasePage
   def checkbox_status
     @driver.find_element(CHECKBOX_STATUS).click
     self
+  end
+
+  def check_error
+    @driver.find_element(ERROR_FIELD).text
   end
 end
