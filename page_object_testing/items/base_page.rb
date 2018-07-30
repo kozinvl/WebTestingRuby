@@ -1,5 +1,4 @@
 require_relative '../resource/url'
-require 'logger'
 
 
 # Basic Page for all site
