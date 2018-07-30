@@ -5,6 +5,7 @@ Feature: Create a new comment. All fields are empty
     Given User creates a new comment
     When 'Save & return' a new comment
     Then  Verify error message 'The Comment Text field is required.'
+    And Close browser
 
   @test_2
   Scenario: User come to the site. Create new comment and fill only "Comment text field" and save it
@@ -12,6 +13,7 @@ Feature: Create a new comment. All fields are empty
     When User fill only 'Comment text field'
     And 'Save & return' a new comment
     Then  Verify error message 'Please, select at least one category'
+    And Close browser
 
   @test_3
   Scenario: User come to the site. Create new comment and fill "Comment text field" and enter
@@ -20,5 +22,6 @@ Feature: Create a new comment. All fields are empty
     When User fill 'Comment text field' and 'Number'
     And 'Save & return' a new comment
     Then  Verify error message 'Number field should be unique of empty'
+    And Close browser
 
 #  new_comment_empty_fields.feature
