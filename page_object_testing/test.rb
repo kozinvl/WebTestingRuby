@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'test-unit'
 require 'selenium-webdriver'
 require_relative 'resource/url'
 require_relative 'items/main_page'
@@ -24,7 +24,7 @@ class TestCommentsPage < Test::Unit::TestCase
                            .filling_text('New Comment Row')
                            .chose_one_category
                            .save_condition
-                           .return
+                           .return_to_main_page
                            .change_status('All')
                            .apply
                            .sort_by_number
@@ -40,7 +40,7 @@ class TestCommentsPage < Test::Unit::TestCase
                            .checkbox_status
                            .chose_one_category
                            .save_condition
-                           .return
+                           .return_to_main_page
                            .change_status('Active')
                            .apply
                            .sort_by_number
