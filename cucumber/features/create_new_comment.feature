@@ -5,3 +5,4 @@ Feature: Add new comment
     Given I create a new comment
     When I save a new comment
     Then  I verify that comment is present
+
