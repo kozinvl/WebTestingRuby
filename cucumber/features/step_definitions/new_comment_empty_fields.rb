@@ -11,7 +11,7 @@ end
 
 When(/^User save a new comment$/) do
   @new_comment_page
-    .save_n_return_condition
+      .save_n_return_condition
 end
 
 Given(/^User fill only 'Comment text field'$/) do
@@ -20,13 +20,13 @@ end
 
 Given(/^User fill 'Comment text field' and 'Number'$/) do
   @new_comment_page
-    .filling_text(TEST_COMMENT_TEXT)
-    .filling_number(NON_VALID_TEST_NUMBER)
+      .filling_text(TEST_COMMENT_TEXT)
+      .filling_number(NON_VALID_TEST_NUMBER)
 end
 
 When(/^'Save & return' a new comment$/) do
   @new_comment_page
-    .save_n_return_condition
+      .save_n_return_condition
 end
 
 Then(/^Verify error message 'The Comment Text field is required\.'$/) do
@@ -39,4 +39,9 @@ end
 
 Then(/^Verify error message 'Number field should be unique of empty'$/) do
   expect(@new_comment_page.check_error).to include(ERROR_NON_UNIQUE_NUMBER)
+end
+
+
+And(/^Close browser$/) do
+  @driver.quit
 end
