@@ -57,7 +57,7 @@ class CommentsPage < BasePage
     self
   end
 
-  def return
+  def return_to_main_page
     @driver.find_element(RETURN).click
     MainPage.new @driver
   end
